@@ -262,5 +262,152 @@ console.log('gen() =' + gen());  // c
 console.log('gen() =' + gen());  // d
 
 
-// ELEMENT
-console.log('************ ELEMENT ');
+// MODIFY ELEMENT -> GENERATOR ARGUMENT IS OPTIONAL.
+// console.log('************ ELEMENT with argument optional');
+//
+// //correct way
+// function element2(array,gen){
+//   return function (){
+//     if(gen === undefined){
+//       gen = fromTo(0, array.length);
+//     }
+//     return function () {
+//       var index = gen();
+//       if (index !== undefined) {
+//         return array[index];
+//     }
+//   };
+// }
+//
+//
+// var gen = element2(["a", "b", "c", "d"]);
+//
+// console.log('gen() =' + gen());  // a
+// console.log('gen() =' + gen());  // b
+// console.log('gen() =' + gen());  // c
+// console.log('gen() =' + gen());  // d
+
+
+//function COLLECT
+// function collect (gen, array){
+//     return function () {
+//       var value = gen();
+//       array.push(value);
+//     }
+//     return value;
+// };
+//
+// var array=[];
+// var gen = collect(fromTo(0,2), array);
+// gen();
+// gen();
+// gen();
+// array //[0,1]
+
+
+
+// FILTER
+//correct way
+
+console.log('************ FILTER ');
+
+// way 1
+// function filter(gen,predicate){
+//   return function(){
+//     var value;
+//     do{
+//       value=gen();
+//     }while( value !== undefined && !predicate(value));
+//       return value;
+//     )
+//   }
+// }
+
+//way 2
+function filter (gen,predicate){
+  return function recur(){
+    var value = gen ();
+    if (value === undefined || predicate(value)){
+      return value;
+    }
+    return recur();
+  };
+}
+
+// my way
+// function filter (ft, f){
+//   return function (){
+//     var val = ft();
+//     if (f(val)) {
+//       return val;
+//     };
+//
+//   };
+// };
+
+var gen = filter (
+  fromTo(0,6),
+  function third(value){
+    return (value%3) ===0;
+  }
+);
+
+console.log(gen());
+console.log(gen());
+console.log(gen());
+console.log(gen());
+console.log(gen());
+console.log(gen());
+
+
+
+// concat
+console.log('************ CONCAT ');
+
+function concat(f1,f2){
+  return function recur(){
+    var value = f1 ();
+    if (value === undefined) {
+      return f2();
+    }else{
+      return value;
+    }
+    return recur();
+  };
+}
+
+
+var gen = concat(fromTo(0,3), fromTo(0,2));
+console.log(gen());
+console.log(gen());
+console.log(gen());
+console.log(gen());
+console.log(gen());
+console.log(gen());
+
+
+// gensymf
+console.log('************ GENSYMF ');
+
+function gensymf2(v){
+  var num = 0;
+  return function (){
+      num +=1;
+      return (v+num);
+  }
+}
+
+function gensymf(v){
+  var num = from(0);
+  return function (){
+      return (v+num());
+  }
+}
+
+
+var geng = gensymf("G");
+var genh = gensymf("H");
+console.log(geng());
+console.log(geng());
+console.log(genh());
+console.log(genh());
