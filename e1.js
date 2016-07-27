@@ -201,3 +201,26 @@ console.log('con var gen = to (from(3), 5);');
 console.log('gen() = ' + gen());
 console.log('gen() = ' + gen());
 console.log('gen() = ' + gen());
+
+
+// FACTORY FROM TO
+console.log('************ FACTORY FROM TO');
+
+function fromTo (f,t){
+  return function (){
+    var next = f;
+    f+=1;
+    if (next < t ){
+      return next;
+    }
+    return undefined;
+  };
+}
+
+var gen = fromTo(0,3);
+console.log ('con gen = fromTo(0,3)...');
+console.log('gen() =' + gen());
+console.log('gen() =' + gen());
+console.log('gen() =' + gen());
+console.log('gen() =' + gen());
+console.log('gen() =' + gen());
