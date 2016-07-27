@@ -35,8 +35,8 @@ function addf (first){
   };
 }
 
-//
 
+// exercice CURRY
 function curry (binary, first){
   return function (second){
     return binary(first, second);
@@ -44,4 +44,45 @@ function curry (binary, first){
 }
 
 var add3 = curry (add, 3);
-console.log('curry = ' + add3(4)); // 7
+//console.log('curry = ' + add3(4)); // 7
+
+// exercice CURRYR
+function curryr (binary, first){
+  return function (second){
+    return binary (second, first);
+  };
+}
+
+var sub3 = curryr (sub, 3);
+sub3(11)  //8
+sub3(3) //0
+
+
+// liftf
+
+function liftf(binary){
+  return function (first){
+    return function (second){
+        return binary (first, second);
+    };
+  };
+}
+
+var addf = liftf (add);
+addf(3)(4)  //7
+liftf(mul)(5)(6)  // 30
+
+// console.log('2 parametros = ' + addf(3)(4));
+// console.log('3 parametros = ' + liftf(mul)(3)(4));
+
+// show four ways to create the inc function
+var inc =   curry( add, 1);
+console.log(inc(5));
+console.log(inc(inc(5)));
+ // inc (5) // 6
+ // inc (inc(5)) //7
+// answers
+ // addf (1);
+ // curry (add,1);
+ // curryr (add,1);
+ // lift(add)(1);
