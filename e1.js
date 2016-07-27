@@ -427,9 +427,9 @@ console.log('************ FIBONACCIF ');
 function fibonaccif(a,b){
   return function(){
     var fib = a;
-    var temp = a+b;
+    var next = a+b;
     a=b;
-    b=temp;
+    b=next;
     return fib;
   }
 }
@@ -443,3 +443,26 @@ console.log(fib());
 console.log(fib());
 console.log(fib());
 console.log(fib());
+
+
+//counter
+console.log('************ COUNTER ');
+function counter(){
+  var val=0;
+  return{
+      up:function(){
+        val += 1;
+        return val;
+      },
+      down:function(){
+        val -= 1;
+        return val;
+      }
+  }
+};
+
+var object = counter();
+var up= object.up;
+var down= object.down;
+console.log(up());
+console.log(down());
