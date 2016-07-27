@@ -118,3 +118,25 @@ function reverse(binaryF){
 
 var bus = reverse(sub);
 console.log ( 'bus (3,2) = ' + bus(3,2)) ;
+
+
+// COMPOSEU
+console.log('************ COMPOSEU');
+function composeu(binaryF1, binaryF2){
+  return function (val) {
+    return (binaryF2(binaryF1(val)));
+  };
+}
+
+console.log("composeu(doble, square) (5) = " + composeu(doble, square) (5));  //100
+
+
+// composeb
+console.log('************ COMPOSEU');
+function composeb(f1,f2){
+  return function (v1,v2,v3){
+    return (f2(f1(v1,v2),v3));
+  };
+}
+
+console.log("composeb(add, mul)(2,3,7) = " + composeb(add, mul)(2,3,7));  // 35
