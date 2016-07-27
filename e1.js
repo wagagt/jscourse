@@ -146,37 +146,58 @@ console.log('************ LIMIT ');
 function limit (binaryF, l){
   var t = 0;
     return function (v1, v2){
-      if(t>=l){
-        l-=1;
+      if(t<=l){
+        l += 1;
         return (binaryF(v1,v2));
       };
       return undefined;
     };
 }
 
-var add_ltd = limit(add,2);
+var add_ltd = limit(add,1);
 add_ltd(3,7); //7
 add_ltd(3,5); //undefinied
-
-console.log ( "add_ltd(3,7)  con add, 2 = " +  add_ltd(3,7));
-console.log ( "add_ltd(3,7)  con add, 2 = " +  add_ltd(3,7));
-console.log ( "add_ltd(3,7)  con add, 2 = " +  add_ltd(3,7));
+console.log ( "con add, 2 = ");
+console.log ( "add_ltd(1,2)  = " +  add_ltd(1,2));
+console.log ( "add_ltd(2,3)  = " +  add_ltd(2,3));
+console.log ( "add_ltd(3,4)  = " +  add_ltd(3,4));
 
 
 
 // GENERATOR
-// GENERATOR FACTORY
-console.log('************ FACTORY ');
+// GENERATOR FACTORY FROM
+console.log('************ FACTORY FROM');
+
 function from (l){
-  var c = l;
   return function (){
-    l +=1;
-    return l;
+    next = l;
+    l+=1;
+    return next;
   }
 }
 
-var gen = from (0);
-console.log ('using gen=from(0)');
+var gen = from (2);
+console.log ('using gen=from(2)');
 console.log( 'gen()' + gen());
 console.log( 'gen()' + gen());
 console.log( 'gen()' + gen());
+
+
+// GENERATOR FACTORY TO
+console.log('************ FACTORY TO');
+
+function to (binaryFrom, end){
+  return function (){
+    var from = binaryFrom();
+    if (from < end){
+      return from;
+    }
+  };
+}
+
+
+var gen = to (from(3), 5);
+console.log('con var gen = to (from(3), 5);');
+console.log('gen() = ' + gen());
+console.log('gen() = ' + gen());
+console.log('gen() = ' + gen());
