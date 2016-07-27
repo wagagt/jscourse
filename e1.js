@@ -466,3 +466,29 @@ var up= object.up;
 var down= object.down;
 console.log(up());
 console.log(down());
+
+
+// revocable
+console.log('************ REVOCABLE ');
+
+function revocable(binaryF){
+  var eneabled=true;
+  return{
+      invoke:  function(a,b)   {
+          if (eneabled){
+            return binaryF(a,b);
+          }
+      },
+      revoke: function(){
+          eneabled=false;
+      }
+  }
+}
+
+var rev=revocable(add);
+var add_rev = rev.invoke;
+console.log (add_rev(3,4));
+rev.revoke();
+console.log(add_rev(5,7)); // undefined
+
+// m
