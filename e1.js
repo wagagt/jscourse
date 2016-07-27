@@ -415,11 +415,20 @@ console.log(genh());
 
 // gensymff
 console.log('************ GENSYMFF');
-// function gensymff(seed){
-//   return function(prefix){
-//     var=gen
-//   }
-// }
+function gensymff(seed){
+  var gen = from();
+  return function(){
+    return seed+ gen();
+  }
+}
+
+var geng = gensymff("G");
+var genh = gensymff("H");
+
+console.log(geng());
+console.log(geng());
+console.log(genh());
+console.log(genh());
 
 // fibonaccif
 console.log('************ FIBONACCIF ');
