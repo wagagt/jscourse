@@ -140,3 +140,43 @@ function composeb(f1,f2){
 }
 
 console.log("composeb(add, mul)(2,3,7) = " + composeb(add, mul)(2,3,7));  // 35
+
+// limit
+console.log('************ LIMIT ');
+function limit (binaryF, l){
+  var t = 0;
+    return function (v1, v2){
+      if(t>=l){
+        l-=1;
+        return (binaryF(v1,v2));
+      };
+      return undefined;
+    };
+}
+
+var add_ltd = limit(add,2);
+add_ltd(3,7); //7
+add_ltd(3,5); //undefinied
+
+console.log ( "add_ltd(3,7)  con add, 2 = " +  add_ltd(3,7));
+console.log ( "add_ltd(3,7)  con add, 2 = " +  add_ltd(3,7));
+console.log ( "add_ltd(3,7)  con add, 2 = " +  add_ltd(3,7));
+
+
+
+// GENERATOR
+// GENERATOR FACTORY
+console.log('************ FACTORY ');
+function from (l){
+  var c = l;
+  return function (){
+    l +=1;
+    return l;
+  }
+}
+
+var gen = from (0);
+console.log ('using gen=from(0)');
+console.log( 'gen()' + gen());
+console.log( 'gen()' + gen());
+console.log( 'gen()' + gen());
