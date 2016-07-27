@@ -217,7 +217,7 @@ console.log('************ FACTORY FROM TO');
 //   };
 // }
 
-function fromTo(star,end){
+function fromTo(start,end){
   return to(
     from(start),
     end
@@ -231,3 +231,22 @@ console.log('gen() =' + gen());
 console.log('gen() =' + gen());
 console.log('gen() =' + gen());
 console.log('gen() =' + gen());
+
+
+// ELEMENT
+console.log('************ ELEMENT ');
+
+function element(arr, binaryF){
+  var ele = binaryF;
+  return function (){
+    return arr[ele()];
+  };
+}
+
+var gen = element(["a", "b", "c", "d"],
+    from (1,3)
+  );
+
+  console.log('gen() =' + gen());  // b
+  console.log('gen() =' + gen());  // c
+  console.log('gen() =' + gen());  // d
