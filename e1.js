@@ -398,7 +398,7 @@ function gensymf2(v){
 }
 
 function gensymf(v){
-  var num = from(0);
+  var num = from(1);
   return function (){
       return (v+num());
   }
@@ -411,3 +411,35 @@ console.log(geng());
 console.log(geng());
 console.log(genh());
 console.log(genh());
+
+
+// gensymff
+console.log('************ GENSYMFF');
+// function gensymff(seed){
+//   return function(prefix){
+//     var=gen
+//   }
+// }
+
+// fibonaccif
+console.log('************ FIBONACCIF ');
+
+function fibonaccif(a,b){
+  return function(){
+    var fib = a;
+    var temp = a+b;
+    a=b;
+    b=temp;
+    return fib;
+  }
+}
+
+var fib = fibonaccif(0,1);
+console.log(fib());//0
+console.log(fib());//1
+console.log(fib());
+console.log(fib());
+console.log(fib());
+console.log(fib());
+console.log(fib());
+console.log(fib());
