@@ -206,15 +206,22 @@ console.log('gen() = ' + gen());
 // FACTORY FROM TO
 console.log('************ FACTORY FROM TO');
 
-function fromTo (f,t){
-  return function (){
-    var next = f;
-    f+=1;
-    if (next < t ){
-      return next;
-    }
-    return undefined;
-  };
+// function fromTo (f,t){
+//   return function (){
+//     var next = f;
+//     f+=1;
+//     if (next < t ){
+//       return next;
+//     }
+//     return undefined;
+//   };
+// }
+
+function fromTo(star,end){
+  return to(
+    from(start),
+    end
+  );
 }
 
 var gen = fromTo(0,3);
