@@ -236,10 +236,20 @@ console.log('gen() =' + gen());
 // ELEMENT
 console.log('************ ELEMENT ');
 
-function element(arr, binaryF){
-  var ele = binaryF;
+// function element(arr, binaryF){
+//   var ele = binaryF;
+//   return function (){
+//     return arr[ele()];
+//   };
+// }
+
+//correct way
+function element(array,gen){
   return function (){
-    return arr[ele()];
+    var index = gen();
+    if (index !== undefined) {
+      return array[index];
+    }
   };
 }
 
@@ -247,6 +257,10 @@ var gen = element(["a", "b", "c", "d"],
     from (1,3)
   );
 
-  console.log('gen() =' + gen());  // b
-  console.log('gen() =' + gen());  // c
-  console.log('gen() =' + gen());  // d
+console.log('gen() =' + gen());  // b
+console.log('gen() =' + gen());  // c
+console.log('gen() =' + gen());  // d
+
+
+// ELEMENT
+console.log('************ ELEMENT ');
