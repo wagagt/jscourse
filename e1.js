@@ -501,3 +501,68 @@ rev.revoke();
 console.log(add_rev(5,7)); // undefined
 
 // m
+console.log('************ M ');
+
+function m (v,s){
+  return{
+    v: v,
+    s: (typeof s === "string") ? s: String(v)
+  }
+}
+
+console.log(m(1));
+
+// addm
+console.log('************ ADDM');
+function addm(a, b){
+  return m(
+    a.value + b.value,
+    "(" + a.source + "+" +
+          b.source + ")"
+  );
+}
+
+// JSON.stringfy(addm (m(3), m(4)));
+// // {"value":7, "source": "(3+4)"}
+//
+// JSON.stringfy(addm(m(1), M(Math.PI, "pi")))
+
+console.log(addm (m(3), m(4)));
+
+// liftM
+console.log('************ liftM');
+function liftm(binary, op){
+  return function (a, b){
+    return m(
+      binary(a.value, b.value),
+      "(" + a.source + op
+          + b.source + ")"
+    );
+  };
+}
+
+var addm2 = liftm(add,"+");
+var mulm = lifm(mul, "*");
+
+//console.log(addm2(m(3)))
+
+// liftm modified
+console.log('************ liftM modified');
+function liftm(binary, op){
+  return function (a, b){
+    if (typeof a === "number"){
+      
+    }
+
+    return m(
+      binary(a.value, b.value),
+      "(" + a.source + op
+          + b.source + ")"
+    );
+  };
+}
+
+var addm = liftm(add, "+");
+
+JSON.stringify(addm(3,4))
+// {"value":7, "source":"(3+4)"}
